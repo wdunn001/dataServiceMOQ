@@ -11,7 +11,7 @@
       <ng-container *ngFor="let question of formModel; trackBy: 'id' | trackBy">
         <div class="input-container" >
           <div class="question-container">
-            <span>{{question.text}}</span>
+            <span>{{question.text}}<sup *ngIf="question.required" class="required">&#42;</sup></span>
           </div>
           <div class="control-container">
             <ng-container *ngTemplateOutlet="specialTemplate; context: { question: question }"></ng-container>
