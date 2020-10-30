@@ -1,0 +1,70 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Your custom quote starts here.</h2>
+    </mat-card-title>
+    <mat-card-subtitle>This is going to be amazing.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="formGroup">
+    <form [formGroup]="formGroup" class="dynamic-form">
+      <ng-container *ngFor="let question of formModel; trackBy: 'id' | trackBy">
+        <div class="input-container" >
+          <div class="question-container">
+            <span>{{question.text}}</span>
+          </div>
+          <div class="control-container">
+            <ng-container *ngTemplateOutlet="specialTemplate; context: { question: question }"></ng-container>
+          </div>
+        </div>
+      </ng-container>
+      <!-- Special Case questions go here -->
+      <ng-template #specialTemplate let-question="question">
+        <ng-container [ngSwitch]="question.id">
+          <ng-container *ngSwitchCase="4">
+
+            <app-auto-complete [question]="question" [formControlName]="question.id"></app-auto-complete>
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>
+            <ng-container *ngTemplateOutlet="
+                genericTemplate;
+                context: { question: question }
+              "></ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+
+      <!-- Generic questions go here -->
+      <ng-template #genericTemplate let-question="question">
+        <ng-container [ngSwitch]="question.type">
+          <ng-container *ngSwitchCase="'input'">
+            <ng-container *ngTemplateOutlet="genericInput; context: { question: question }"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="'select'">
+            <ng-container *ngTemplateOutlet="genericSelect; context: { question: question }"></ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+      <ng-template #genericInput let-question="question">
+        <mat-form-field class="full-width">
+          <input [formControlName]="question.id" matInput />
+        </mat-form-field>
+      </ng-template>
+      <ng-template #genericSelect let-question="question">
+        <mat-form-field class="full-width">
+          <mat-select [formControlName]="question.id" [multiple]="question.multiple">
+            <mat-option *ngFor="let option of question.options; trackBy: 'id' | trackBy" [value]="option.id">
+              {{ option.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="formGroup" align="end">
+    <button mat-button (click)="cancel()">Cancel</button>
+    <button mat-raised-button color="accent" [disabled]="this.formGroup.invalid" (click)="submit()">Submit</button>
+  </mat-card-actions>
+</mat-card>

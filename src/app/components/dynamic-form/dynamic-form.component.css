@@ -1,0 +1,35 @@
+.dynamic-form {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: column wrap;
+}
+
+.input-container {
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
+}
+
+.question-container {
+    display: flex;
+    flex: 1 1 auto;
+    width: 400px;
+    align-items: center;
+    font-weight: 500;
+    font-size: large;
+}
+
+.control-container {
+    display: flex;
+    flex: 1 1 auto;
+    width: 300px;
+    margin-left: 30px;
+}
+mat-card-content {
+    margin: 0 16px;
+}
+
+mat-card-subtitle {
+    font-size: 20px;
+    font-weight: 500;
+}
