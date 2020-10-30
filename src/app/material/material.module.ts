@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatRadioButton, MatInputModule, MatFormField } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 
-const materialModules = [
+export const materialModules = [
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatOptionModule,
+  MatAutocompleteModule,
+  MatSelectModule,
+  MatIconModule
 ];
 @NgModule({
   imports: materialModules,

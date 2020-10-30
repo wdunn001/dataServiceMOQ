@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +7,10 @@ import { ApiService } from './api.service';
 })
 export class AppComponent implements OnInit {
 
-  questions;
-
-  constructor(private api: ApiService) { }
+  title = "Bold Penguin";
+  constructor() { }
 
   ngOnInit(): void {
-    this.showQuestions();
   }
 
-  showQuestions() {
-    this.api.getQuestions()
-        .subscribe((data) => {
-          this.questions = data;
-        });
-  }
 }
